@@ -56,6 +56,22 @@ The script utilizes a JSON configuration file (`config.json`) to define differen
 - The SEP parameter specifies the separator character between configuration values.
 - The DEVICE_ID parameter identifies the AWS device ID to send the payload.
 
+## Payload
+
+| Event                   | Description                                              |
+|-------------------------|----------------------------------------------------------|
+| Buzzer_Set (01)         | Sets the buzzer volume to Low, Medium, or High (0, 1, 2)|
+| NFC_Set (02)            | Enables or disables the NFC reader.                      |
+| Bin_Level (03)          | Sets the "Bin Full" sensor alert distance to 0, 1, or 2.|
+| UHF_Power (04)          | Adjusts the UHF reader power to 0, 1, or 2.             |
+| Display_Set (05)        | Customizes the LED display for Venue 1, Venue 2, or Venue 3.|
+| BinID_Set (06)          | Assigns a unique ID to each Topper board.               |
+| NFC_Merch_Set (07)      | Configures NFC parameters for updating the merchant ID. |
+| BOOT_MODE (08)          | Configure topper to enter in boot mode.                 |
+
+
+
+
 ## Script Structure
 The script consists of the following components:
 
