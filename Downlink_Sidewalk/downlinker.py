@@ -146,7 +146,7 @@ class Downlink:
             "FLAG": {"enable": "1", "disable": "0"},
             # Set Internal ID for each Venue. E.g. User's Pepsi will
             # interpreted as P101_East at backend
-            "VENUE": {"pepsi_east": "pep", "pepsi_west": "PEPSIWESTSF03", "pepsi_mid": "PEPSIMIDCHI07"},
+            "VENUE": {"2": "2", "1": "1", "pepsi_mid": "PEPSIMIDCHI07"},
         }
 
         if self.Buzzer_Set in SetMap["LEVEL"]:

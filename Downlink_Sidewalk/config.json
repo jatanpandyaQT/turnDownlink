@@ -18,12 +18,12 @@
         "NFC_Set": "ENABLE",
         "Bin_Level": "LOW",
         "UHF_Power": "LOW",
-        "Display_Set": "PEPSI_EAST",
-        "BinID_Set": "JP001",
-        "NFC_Merch_Set": "VTAP010",
+        "Display_Set": "1",
+        "BinID_Set": "0",
+        "NFC_Merch_Set": "pass.com.turn.dev.loyalty",
         "BOOT_MODE": "TRUE",
         "N": "50",
-        "FREQ": "5",
+        "FREQ": "10",
         "SEP": "",
         "DEVICE_ID": "5ac752d9-a6ab-4ba0-bef5-304a0cc41c9b"
     },
@@ -34,11 +34,11 @@
         "UHF_Power": "MEDIUM",
         "Display_Set": "PEPSI_EAST",
         "BinID_Set": "j",
-        "NFC_Merch_Set": "v",
+        "NFC_Merch_Set": "pass.com.turn.dev.loyalty",
         "BOOT_MODE": "FALSE",
         "N": "30",
         "FREQ": "10",
         "SEP": "",
-        "DEVICE_ID": "c5c2fcad-82f8-4fee-af20-c2470fb42811"
+        "DEVICE_ID": "5ac752d9-a6ab-4ba0-bef5-304a0cc41c9b"
     }
 }
