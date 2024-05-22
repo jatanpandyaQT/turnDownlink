@@ -234,11 +234,16 @@ class Downlink:
         for i in range(1, N + 1):
             wireless_metadata = {
                 "Sidewalk": {
-                    "Seq": i,
+                    # "Seq": i,
                     "MessageType": "CUSTOM_COMMAND_ID_RESP",
                     "AckModeRetryDurationSecs": 5,
                 }
             }
+
+            ## Findings: Restarting Node seems to "reset" the seq buffer, and starts accepting if you send it again with value : 1, but with `PSA ERROR` (unclear what that is)
+            ## If no seq is supplied, it seems that aws in its backend is doing what we are doing (supplying random seq int value to circumvent collison, 
+            ## which should be enough cz the probablity of collison will be 
+            ## 0.00006103888 % (1/16383) i.e. max value of seq)
 
             response = self.aws_client.send_data_to_wireless_device(
                 Id=device_id,
@@ -248,7 +253,7 @@ class Downlink:
             )
             print("-------------------------------------------------------------------------------------------------\n")
             pprint(response)
-            print(f"\nPayload '{self.payload}' sent to device '{device_id}'")
+            print(f"\nPayload '{self.payload}' sent to device '{device_id}' with SEQ: {i}")
             print("\n-------------------------------------------------------------------------------------------------\n")
 
             time.sleep(freq)
@@ -309,5 +314,16 @@ def main():
     dl.awsDownlink(N=int(config.get("N")), freq=int(config.get("FREQ")))
 
 
-if __name__ == "__main__":
-    main()
+
+
+main()
+
+
+# schedules = [600]  
+# for delay in schedules:
+#     print(f"Running routine:-----------------------------------------------------------------------------------------")
+#     main()
+#     time.sleep(delay)
+
+#     print(f"Running routine 2:-----------------------------------------------------------------------------------------")
+#     main()
