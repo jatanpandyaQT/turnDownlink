@@ -17,8 +17,9 @@ class Downlink:
 
     The script enables customization of various parameters for the IoT device. Each setting corresponds to a specific action, indicated by a numerical code:
 
+
     01 = Sets the buzzer volume to Low, Medium, or High (0, 1, 2).
-    02 = Enables or disables the NFC reader.
+    02 = Enables or disables the NFC reader. (0 or 1)
     03 = Sets the "Bin Full" sensor alert distance to 0, 1, or 2.
     04 = Adjusts the UHF reader power to 0, 1, or 2.
     05 = Customizes the LED display for Venue 1, Venue 2, or Venue 3.
@@ -28,7 +29,14 @@ class Downlink:
     09 = Separator character between each configuration.
     10 = AWS Device ID the payload has to be sent to.
 
+    // Tip: All values will be in ASCII which is then encoded to byte64 which is translated to it's ascii representation
+    eg. type(b'MDEwMDEwdGVzdF9qcA==') is bytes;
+        which is then converted to ASCII --> 'MDEwMDEwdGVzdF9qcA==' (i.e class <str>)
+
+    
+
     Example Configuration:
+
 
     Buzzer_Set = "Low"
     NFC_Set = "Enable"
@@ -37,7 +45,7 @@ class Downlink:
     Display_Set = "Venue_1"
     BinID_Set = "QTLLC"
     NFC_Merch_Set = "VTAP007"
-    BOOT_MODE = "True"
+    Boot_Mode = "True"
     SEP = ","
     DEVICE_ID = "5ac752d9-a6ab-4ba0-bef5-304a0cc41c9b"
 
@@ -88,7 +96,7 @@ class Downlink:
         Display_Set="DEFAULT",
         BinID_Set="DEFAULT",
         NFC_Merch_Set="DEFAULT",
-        BOOT_MODE="DEFAULT",
+        Boot_Mode="DEFAULT",
         SEP="<SEP>",
         DEVICE_ID="DEFAULT"
     ):
@@ -99,7 +107,7 @@ class Downlink:
         self.Display_Set = Display_Set.lower()
         self.BinID_Set = BinID_Set.lower()
         self.NFC_Merch_Set = NFC_Merch_Set.lower()
-        self.BOOT_MODE = BOOT_MODE
+        self.Boot_Mode = Boot_Mode
         self.DEVICE_ID = DEVICE_ID
 
         # Config vars
@@ -121,7 +129,7 @@ class Downlink:
             f"Display Setting: {self.Display_Set}\n"
             f"Bin ID Setting: {self.BinID_Set}\n"
             f"NFC Merchant Setting: {self.NFC_Merch_Set}\n"
-            f"Boot Mode: {self.BOOT_MODE}\n"
+            f"Boot Mode: {self.Boot_Mode}\n"
             f"<SEP>: '{self.SEP}'\n"
             f"DEVICE_ID: '{self.DEVICE_ID}'\n"
             f"========================\n"
@@ -217,6 +225,9 @@ class Downlink:
         PAYLOAD_BYTE_BASE_64 = base64.b64encode(PAYLOAD_BYTE)
         self.payload = PAYLOAD_BYTE_BASE_64.decode("ascii")
         print(f"Byte64 Payload : {self.payload}\n")
+        print(type(PAYLOAD_BYTE_BASE_64))
+        print(PAYLOAD_BYTE_BASE_64)
+        print(self.payload)
 
     def prep(self):
         self.configure()
@@ -296,16 +307,16 @@ def main():
         Display_Set=config.get("Display_Set", "DEFAULT"),
         BinID_Set=config.get("BinID_Set", "DEFAULT"),
         NFC_Merch_Set=config.get("NFC_Merch_Set", "DEFAULT"),
-        BOOT_MODE=config.get("BOOT_MODE", "DEFAULT"),
+        Boot_Mode=config.get("Boot_Mode", "DEFAULT"),
         SEP=config.get("SEP", "<SEP>"),
         DEVICE_ID=config.get("DEVICE_ID", "DEFAULT")
     )
 
     print(dl)
 
-    if dl.BOOT_MODE.lower() == "true":
+    if dl.Boot_Mode.lower() == "true":
         confirmation = input(
-            "BOOT_MODE is set to TRUE. Proceed with Caution. Continue? (y/n): "
+            "Boot_Mode is set to TRUE. Proceed with Caution. Continue? (y/n): "
         )
         if confirmation.lower() != "y":
             print("Exiting...")
