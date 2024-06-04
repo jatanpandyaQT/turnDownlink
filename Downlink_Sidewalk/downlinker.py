@@ -107,7 +107,7 @@ class Downlink:
         self.Display_Set = Display_Set.lower()
         self.BinID_Set = BinID_Set.lower()
         self.NFC_Merch_Set = NFC_Merch_Set.lower()
-        self.Boot_Mode = Boot_Mode
+        self.Boot_Mode = Boot_Mode.lower()
         self.DEVICE_ID = DEVICE_ID
 
         # Config vars
@@ -155,6 +155,10 @@ class Downlink:
             # Set Internal ID for each Venue. E.g. User's Pepsi will
             # interpreted as P101_East at backend
             "VENUE": {"2": "2", "1": "1", "pepsi_mid": "PEPSIMIDCHI07"},
+            "MODE" : {
+                "false" : "0",
+                "true" : "1"
+            }
         }
 
         if self.Buzzer_Set in SetMap["LEVEL"]:
@@ -200,6 +204,16 @@ class Downlink:
         else:
             raise ValueError(
                 f"Acceptable parameters for <Display_Set> are {', '.join(SetMap['VENUE'].keys())}"
+            )
+        
+
+        if self.Boot_Mode in SetMap["MODE"]:
+            self.Boot_Mode = SetMap["MODE"][self.Boot_Mode]
+        elif self.Boot_Mode == "DEFAULT":
+            pass
+        else:
+            raise ValueError(
+                f"Acceptable parameters for <Boot_Mode> are {', '.join(SetMap['MODE'].keys())}"
             )
 
     def payloadStruct(self):
@@ -247,7 +261,7 @@ class Downlink:
         for i in range(1, N + 1):
             wireless_metadata = {
                 "Sidewalk": {
-                    "Seq": i+16,
+                    "Seq": i+3,
                     "MessageType": "CUSTOM_COMMAND_ID_RESP",
                     "AckModeRetryDurationSecs": 5,
                 }
