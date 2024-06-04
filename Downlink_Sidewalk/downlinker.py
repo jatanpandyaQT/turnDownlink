@@ -10,7 +10,7 @@ import json
 import argparse
 import os
 from pprint import pprint
-
+import random
 class Downlink:
     """
     Configures settings for a remote IoT device and sends the configuration payload using AWS IoT Wireless.
@@ -259,9 +259,10 @@ class Downlink:
             device_id = self.DEVICE_ID
 
         for i in range(1, N + 1):
+            seq = i+random.randint(20,1000)
             wireless_metadata = {
                 "Sidewalk": {
-                    "Seq": i+3,
+                    "Seq": seq,
                     "MessageType": "CUSTOM_COMMAND_ID_RESP",
                     "AckModeRetryDurationSecs": 5,
                 }
@@ -280,7 +281,7 @@ class Downlink:
             )
             print("-------------------------------------------------------------------------------------------------\n")
             pprint(response)
-            print(f"\nPayload '{self.payload}' sent to device '{device_id}' with SEQ: {i}")
+            print(f"\nPayload '{self.payload}' sent to device '{device_id}' with SEQ: {seq}")
             print("\n-------------------------------------------------------------------------------------------------\n")
 
             time.sleep(freq)

@@ -22,8 +22,8 @@
         "BinID_Set": "0", 
         "Boot_Mode": "FALSE",
         "NFC_Merch_Set": "pass.com.turn.dev.loyalty",
-        "N": "50",
-        "FREQ": "5",
+        "N": "100",
+        "FREQ": "10",
         "SEP": "",
         "DEVICE_ID": "5ac752d9-a6ab-4ba0-bef5-304a0cc41c9b"
     },
