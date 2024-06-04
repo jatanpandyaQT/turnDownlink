@@ -245,7 +245,7 @@ class Downlink:
         for i in range(1, N + 1):
             wireless_metadata = {
                 "Sidewalk": {
-                    # "Seq": i,
+                    "Seq": i+92,
                     "MessageType": "CUSTOM_COMMAND_ID_RESP",
                     "AckModeRetryDurationSecs": 5,
                 }
