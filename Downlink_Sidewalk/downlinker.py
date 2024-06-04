@@ -216,6 +216,8 @@ class Downlink:
             + self.SEP
             + self.BinID_Set
             + self.SEP
+            + self.Boot_Mode
+            + self.SEP
             + self.NFC_Merch_Set
         )
         print(f"\nRaw Payload : {self.payload_raw}\n")
@@ -225,9 +227,9 @@ class Downlink:
         PAYLOAD_BYTE_BASE_64 = base64.b64encode(PAYLOAD_BYTE)
         self.payload = PAYLOAD_BYTE_BASE_64.decode("ascii")
         print(f"Byte64 Payload : {self.payload}\n")
-        print(type(PAYLOAD_BYTE_BASE_64))
-        print(PAYLOAD_BYTE_BASE_64)
-        print(self.payload)
+        # print(type(PAYLOAD_BYTE_BASE_64))
+        # print(PAYLOAD_BYTE_BASE_64)
+        # print(self.payload)
 
     def prep(self):
         self.configure()
@@ -245,7 +247,7 @@ class Downlink:
         for i in range(1, N + 1):
             wireless_metadata = {
                 "Sidewalk": {
-                    "Seq": i+92,
+                    "Seq": i+16,
                     "MessageType": "CUSTOM_COMMAND_ID_RESP",
                     "AckModeRetryDurationSecs": 5,
                 }
